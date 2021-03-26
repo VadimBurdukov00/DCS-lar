@@ -1,0 +1,14 @@
+h1{
+	color:white;
+}
+a.nav-link{
+	color:white;
+}
+.error-block{
+	opacity:0;
+}
+
+.error-text{
+	color:red;
+}
+
