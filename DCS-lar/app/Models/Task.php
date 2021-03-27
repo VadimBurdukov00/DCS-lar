@@ -9,8 +9,10 @@ class Task extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function doers()
     {
-    	return $this->belongsToMany('App\Doer');
+    	return $this->belongsToMany('App\Models\Doer');
     }
 }
