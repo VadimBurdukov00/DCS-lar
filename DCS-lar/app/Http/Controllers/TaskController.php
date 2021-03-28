@@ -28,11 +28,15 @@ class TaskController extends Controller
         	'Doers' => Doer::get()
         ]);
     }
- 	public function saveTask(Request $request) {
-    	$task = Task::create($request->all());
+ 	public function saveTask(Request $request) {	
     	if($request->input('doers')){
+            $task = Task::create($request->all());
     		$task->doers()->attach($request->input('doers'));
-    	}
+            return json_encode(array("info" => $task, "doers" => $task->doers()->pluck('name')->implode(', ')));
+    	} else {
+            return json_encode(array("info" => false));
+        }
+        
     }
 
 
@@ -55,6 +59,7 @@ class TaskController extends Controller
     	$task = Task::find($request -> id);
     	$task->delete();
     	$task->doers()->detach();
+        return json_encode(array("deleted" => true));
     }
 
 }

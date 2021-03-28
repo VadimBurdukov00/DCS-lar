@@ -1,8 +1,9 @@
+@extends('layout')
+@section('content')
 <div class="container">
   	<div class="row">
   		<div class="col-sm-12">	
 			<form id="editForm" method = "post" action="/tasks/update">
-				{{ csrf_field() }}
 
 				 <input type="hidden" name="id" value={{$Task-> id}}>
 				<div>
@@ -39,3 +40,6 @@
 		</div>
 	</div>
 </div>
+@endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/tasks/custom.js"></script>

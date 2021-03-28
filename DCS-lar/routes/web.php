@@ -15,7 +15,7 @@ use App\Http\Controllers\DoerController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('start');
 });
 
 Route::prefix('tasks')->group(function(){ 
@@ -24,7 +24,7 @@ Route::prefix('tasks')->group(function(){
 	Route::get('/search/{search?}', [TaskController::class, 'index']);
 	Route::get('/addTask', [TaskController::class, 'addTask']);
 	Route::get('/editTask/{id}', [TaskController::class, 'viewTask']);
-	Route::get('/delete/{id}', [TaskController::class, 'deleteTask']);
+	Route::post('/delete/{id}', [TaskController::class, 'deleteTask']);
 
 	Route::post('/update', [TaskController::class, 'updateTask']);
 	Route::post('/save', [TaskController::class, 'saveTask']);

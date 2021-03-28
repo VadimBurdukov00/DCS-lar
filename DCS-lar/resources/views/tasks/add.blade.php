@@ -1,7 +1,7 @@
 <div class="container">
   	<div class="row">
   		<div class="col-sm-12">	
-			<form id="contactform" method = "post" action="/tasks/save">
+			<form id="addform" method = "post" action="/tasks/save">
 				{{ csrf_field() }}
 				<div>
 					<label>Название</label>
@@ -36,4 +36,3 @@
 		</div>
 	</div>
 </div>
-<script src="/js/custom.js"></script>
