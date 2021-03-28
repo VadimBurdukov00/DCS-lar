@@ -13,4 +13,9 @@ class Doer extends Model
     {
     	return $this->belongsToMany('App\Models\Task');
     }
+
+    public function tasksWhere()
+    {
+    	return $this->belongsToMany('App\Models\Task')->wherePivot('task_id');
+    }
 }

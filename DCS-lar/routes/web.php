@@ -20,7 +20,8 @@ Route::get('/', function () {
 
 Route::prefix('tasks')->group(function(){ 
 
-	Route::get('/{search?}', [TaskController::class, 'index']);
+	Route::get('/', [TaskController::class, 'index']);
+	Route::get('/search/{search?}', [TaskController::class, 'index']);
 	Route::get('/addTask', [TaskController::class, 'addTask']);
 	Route::get('/editTask/{id}', [TaskController::class, 'viewTask']);
 	Route::get('/delete/{id}', [TaskController::class, 'deleteTask']);
@@ -34,8 +35,8 @@ Route::prefix('doers')->group(function(){
 	Route::get('/', [DoerController::class, 'index']);
 	Route::get('/addDoer', [DoerController::class, 'addDoer']);
 	Route::get('/editDoer/{id}', [DoerController::class, 'viewDoer']);
+	Route::get('/delete/{id}', [DoerController::class, 'deleteDoer']);
 
 	Route::post('/update', [DoerController::class, 'updateDoer']);
-	Route::post('/delete/{id}', [DoerController::class, 'deleteDoer']);
 	Route::post('/save', [DoerController::class, 'saveDoer']);
 });
