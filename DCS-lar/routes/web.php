@@ -24,9 +24,9 @@ Route::prefix('tasks')->group(function(){
 	Route::get('/search/{search?}', [TaskController::class, 'index']);
 	Route::get('/addTask', [TaskController::class, 'addTask']);
 	Route::get('/editTask/{id}', [TaskController::class, 'viewTask']);
+	Route::get('/delete/{id}', [TaskController::class, 'deleteTask']);
 
 	Route::post('/update', [TaskController::class, 'updateTask']);
-	Route::post('/delete/{id}', [TaskController::class, 'deleteTask']);
 	Route::post('/save', [TaskController::class, 'saveTask']);
 	Route::post('/search', [TaskController::class, 'searchTask']);
 });
