@@ -47,12 +47,16 @@ class TaskController extends Controller
         ]);
     } 
     public function updateTask(Request $request) {
-    	$task = Task::find($request -> id);
-    	$task->update($request -> all());
-    	$task->doers()->detach();
+    	
     	if($request->input('doers')){
+            $task = Task::find($request -> id);
+            $task->update($request -> all());
+            $task->doers()->detach();
     		$task->doers()->attach($request->input('doers'));
-    	}	
+            return json_encode(array("updated" => true));
+    	}	else {
+            json_encode(array("updated" => false));
+        }
     }
 
     public function deleteTask(Request $request) {

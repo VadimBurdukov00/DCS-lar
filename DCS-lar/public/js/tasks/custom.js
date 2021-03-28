@@ -84,9 +84,7 @@ $(document).ready(function () {
         });
     });	
 
-    var notiEdit = new jBox('Modal', {
-      content: 'Задача успешно обновлена'
-    });
+    
 
     $(document).on('submit', $('#editForm'), function (e) {
         e.preventDefault();
@@ -96,14 +94,22 @@ $(document).ready(function () {
             url: '/tasks/update',
             data: $('#editForm').serialize(),
             success: function (data) {
-                if (data) {
-                  console.log(data)
-                    $("body").html(data);
+                response = jQuery.parseJSON(data)
+                if (response['updated']) {
+                    var notiEdit = new jBox('Modal', {
+                      content: 'Задача успешно обновлена'
+                    });
                     notiEdit.open();
-                } else { 
-                    console.log(data)
-                    $('#senderror').show();
-                    $('#sendmessage').hide();
+                    
+                    
+                } else {
+                    var notiEdit = new jBox('Modal', {
+                      content: 'Необходимо указать хотя бы одного исполнителя!'
+                      onclose: function(){
+                        window.location.href = "/tasks"
+                    }
+                    });
+                    notiEdit.open();
                 }
             },
             error: function () {
