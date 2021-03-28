@@ -46,5 +46,6 @@ class DoerController extends Controller
 		$Doer = Doer::find($request -> id);	 	
     	$Doer->delete();
     	$Doer->tasks()->detach();
+        return true;
     }
 }

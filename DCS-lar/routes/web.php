@@ -35,7 +35,7 @@ Route::prefix('doers')->group(function(){
 	Route::get('/', [DoerController::class, 'index']);
 	Route::get('/addDoer', [DoerController::class, 'addDoer']);
 	Route::get('/editDoer/{id}', [DoerController::class, 'viewDoer']);
-	Route::get('/delete/{id}', [DoerController::class, 'deleteDoer']);
+	Route::post('/delete/{id}', [DoerController::class, 'deleteDoer']);
 
 	Route::post('/update', [DoerController::class, 'updateDoer']);
 	Route::post('/save', [DoerController::class, 'saveDoer']);

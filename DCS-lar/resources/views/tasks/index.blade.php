@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<script src="/js/doers/doers.js"></script>
+	<script src="/js/tasks/custom.js"></script>
+</head>
+<body>
 <form id="searchForm" method = "get" action="">
  	<input type="text" name="search" <?if ($search): ?> value="<?=$search?>"<?endif;?> class="form-control">
 	 <input type="submit" value="Искать"  class="form-control mr-sm-2">
@@ -32,3 +43,6 @@
 </div>
 				
 @endforeach
+
+</body>
+</html>

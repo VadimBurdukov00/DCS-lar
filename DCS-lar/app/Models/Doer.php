@@ -9,13 +9,11 @@ class Doer extends Model
 {
     use HasFactory;
 
+     protected $guarded = ['id'];
+
     public function tasks()
     {
     	return $this->belongsToMany('App\Models\Task');
     }
 
-    public function tasksWhere()
-    {
-    	return $this->belongsToMany('App\Models\Task')->wherePivot('task_id');
-    }
 }
