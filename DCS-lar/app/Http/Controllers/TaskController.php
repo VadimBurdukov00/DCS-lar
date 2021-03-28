@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
 
-    public function index() {
+    public function index(Request $request) {
+    	if (!empty($request->search)){
+    		$Tasks = Task::where('name',  'LIKE', '%' . $request->search . '%')->get();
+    	} else {
+    		$Tasks = Task::get();
+    	}
     	return view('Tasks.index',[
-        	'Tasks' => Task::get()
+        	'Tasks' => $Tasks,
+        	'search' => $request->search
         ]);
     }
 

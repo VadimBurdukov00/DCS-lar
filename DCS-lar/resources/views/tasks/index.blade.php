@@ -1,3 +1,18 @@
+<form id="searchForm" method = "get" action="">
+ 	<input type="text" name="search" <?if ($search): ?> value="<?=$search?>"<?endif;?> class="form-control">
+	 <input type="submit" value="Искать"  class="form-control mr-sm-2">
+
+</form>
+@if($search)
+		Результаты по запросу: {{$search}}<br>
+		<a href="/tasks"  class="btn btn-primary more-button">Сбросить фильтр</a>
+@endif
+
+
+<div class="col-sm-6 ">
+  	<!--button id="myModal"  class="btn btn-primary more-button"> Добавить</button -->
+  	<a href="/tasks/addTask"> Добавить</a>
+</div> 
 @foreach($Tasks as $Task)
 <div class="row">
 	<div class="col-sm-6">
