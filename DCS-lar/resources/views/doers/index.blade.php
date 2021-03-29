@@ -2,11 +2,12 @@
 @section('content')
 <div class="container">
   	<div class="row">	
-<div class="col-sm-6 ">
-	<button id="addDoer"  class="btn btn-primary more-button"> Добавить</button -->
-</div> 
-</div> 
-</div> 
+  		<div class="col-sm-6"></div>
+			<div class="col-sm-6 ">
+				<button id="addDoer"  class="btn btn-primary more-button"> Добавить</button -->
+			</div> 
+		</div> 
+	</div> 
 <div class = "container doers">
 
 @foreach($Doers as $Doer)

@@ -33,7 +33,7 @@
 
 				<div>
 					<label>	Описание</label>
-					 <input type="text" name="desc"class="form-control"  value={{$Task->desc}}><br>
+					<textarea name="desc"class="form-control" >{{$Task->desc}}</textarea> <br>
 				</div>
 
 				<div>
