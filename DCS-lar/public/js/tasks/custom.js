@@ -8,7 +8,7 @@ $(document).ready(function () {
                   
                   "Исполинтели: " + response['doers'] +
                   "<button id='del' attr-id='"+response['info'].id+"' class='btn btn-primary more-button'>Удалить</button>" +
-                  " <a href='/doers/editDoer/"+response['info'].id+"' class='btn btn-primary more-button'>Редактировать</a>"+
+                  " <a href='/tasks/editTask/"+response['info'].id+"' class='btn btn-primary more-button'>Редактировать</a>"+
                 "</div>"+
               "</div>"+
             "</div>"
@@ -42,7 +42,7 @@ $(document).ready(function () {
                                   content: 'Задача успешно добавлена'
                                 });
                                 addModal.close();
-                                $(".main").append(apendTask(response));
+                                $(".tasks").append(apendTask(response));
                                 notiAdd.open();
                             } else {
                                 var notiAdd = new jBox('Modal', {
@@ -86,7 +86,7 @@ $(document).ready(function () {
 
     
 
-    $(document).on('submit', $('#editForm'), function (e) {
+    $('#editForm').on('submit', function (e) {
         e.preventDefault();
      
         $.ajax({

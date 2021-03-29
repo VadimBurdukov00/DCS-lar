@@ -5,7 +5,7 @@
 <div class="container">
   	<div class="row">
 	  	<div class="col-sm-6">
-			<form id="searchForm" method = "GET" action="/">
+			<form id="searchForm" method = "GET" action="/tasks">
 				
 			 	<input type="text" name="search" <?if ($search): ?> value="<?=$search?>"<?endif;?> class="form-control">
 				 <input type="submit" value="Искать"  class="form-control mr-sm-2">
@@ -22,7 +22,7 @@
 			<a href="/tasks"  class="btn btn-primary more-button">Сбросить фильтр</a>
 	@endif
 </div>
-<div class = "container">
+<div class = "container tasks">
 	@foreach($Tasks as $Task)
 	<div class="row">
 		<div class="col-sm-6">
