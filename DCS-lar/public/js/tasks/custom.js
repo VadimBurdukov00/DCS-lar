@@ -4,9 +4,9 @@ $(document).ready(function () {
               "<div class='col-sm-6'>"+
                 "<div class='task'>"+
                   "Название: "+ response['info'].name + "<hr>"+ 
-                  "Описание: " + response['info'].desc+ 
-                  
-                  "Исполинтели: " + response['doers'] +
+                  "Описание: " + response['info'].desc+ "<br>"+ 
+                  "Статус"+ response['status'].status+ "<br>"+ 
+                  "Исполинтели: " + response['doers'] + "<br>"+ 
                   "<button id='del' attr-id='"+response['info'].id+"' class='btn btn-primary more-button'>Удалить</button>" +
                   " <a href='/tasks/editTask/"+response['info'].id+"' class='btn btn-primary more-button'>Редактировать</a>"+
                 "</div>"+

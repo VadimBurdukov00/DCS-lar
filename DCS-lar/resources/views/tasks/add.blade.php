@@ -19,7 +19,11 @@
 				<div>
 					<label>Статус</label>
 				 	
-						<input type="text" name="status" class="form-control">
+					<select name="staus" class="form-control">
+						@foreach($Status as $S)
+							<option value={{$S->id}}>{{$S->status}}</option>
+						@endforeach
+					</select>
 					
 				</div>
 

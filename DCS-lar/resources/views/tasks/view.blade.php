@@ -24,7 +24,11 @@
 				</div><hr>
 				<div>
 					<label>	Cтатус</label>
-					<input type="text" value="{{$Task->staus}}">
+					<select name="staus" class="form-control">
+						@foreach($Status as $S)
+							<option value={{$S->id}} <?if ($Task->status == $S->id):?> selected <?endif;?>>{{$S->status}}</option>
+						@endforeach
+					</select>
 				</div>
 
 				<div>

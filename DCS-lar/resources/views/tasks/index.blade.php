@@ -31,10 +31,14 @@
 				Описание:
 				{{$Task->desc}}<br>
 				Статус
-				{{$Task->staus}}<hr>
+					@foreach($Status as $s)
+						@if ($s->id == $Task->staus)
+							{{$s->status}}<br>
+						@endif
+					@endforeach
 
 				Исполнители: 
-				{{$Task->doers()->pluck('name')->implode(', ')}}
+				{{$Task->doers()->pluck('name')->implode(', ')}}<br>
 
 				<button id="del" attr-id="{{$Task->id}}" class="btn btn-primary more-button">Удалить</button>
 				<a href="/tasks/editTask/{{$Task->id}}" class="btn btn-primary more-button">Редактировать</a>
