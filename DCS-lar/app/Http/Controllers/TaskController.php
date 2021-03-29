@@ -61,7 +61,7 @@ class TaskController extends Controller
     		$task->doers()->attach($request->input('doers'));
             return json_encode(array("updated" => true));
     	}	else {
-            json_encode(array("updated" => false));
+            return json_encode(array("updated" => false));
         }
     }
 

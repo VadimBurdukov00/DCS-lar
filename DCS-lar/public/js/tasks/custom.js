@@ -94,6 +94,7 @@ $(document).ready(function () {
             url: $('#editForm').attr( 'action' ),
             data: $('#editForm').serialize(),
             success: function (data) {
+                console.log(data)
                 response = jQuery.parseJSON(data)
                 if (response['updated']) {
                     var notiEdit = new jBox('Modal', {
