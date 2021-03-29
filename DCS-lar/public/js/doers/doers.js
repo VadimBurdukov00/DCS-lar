@@ -1,4 +1,9 @@
- $(document).on('submit', $('#editForm'), function (e) {
+ 
+
+
+$(document).ready(function () {
+
+  $('#editForm').on('submit', function (e) {
     e.preventDefault();
 
     $.ajaxSetup({
@@ -28,9 +33,6 @@
       },
     });
   });
-
-
-$(document).ready(function () {
 
   function apendDoer(response){
     return  "<div class='row'>"+

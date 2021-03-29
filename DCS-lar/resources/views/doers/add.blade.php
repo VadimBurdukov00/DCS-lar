@@ -5,12 +5,12 @@
 				{{ csrf_field() }}
 				<div>
 					<label>Имя</label>
-					 <input type="text" name="name" class="form-control">
+					 <input type="text" name="name" class="form-control" required>
 				</div>
 
 				<div>
 					<label>Должность</label>
-					 <input type="text" name="post" class="form-control "><br>
+					 <input type="text" name="post" class="form-control" required><br>
 				</div>
 
 				<div>
