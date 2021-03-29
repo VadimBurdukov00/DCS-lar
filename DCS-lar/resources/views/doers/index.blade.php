@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-
-	<link rel="stylesheet" href="/css/style.css">
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="/js/doers/doers.js"></script>
-
-	<script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.2.14/dist/jBox.all.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.2.14/dist/jBox.all.min.css" rel="stylesheet">
-</head>
-<body>
+@extends('layout')
+@section('content')
+<div class="container">
+  	<div class="row">	
 <div class="col-sm-6 ">
 	<button id="addDoer"  class="btn btn-primary more-button"> Добавить</button -->
 </div> 
+</div> 
+</div> 
+<div class = "container doers">
+
 @foreach($Doers as $Doer)
 	<div class="row">
 		<div class="col-sm-6">
@@ -32,5 +24,7 @@
 		</div>	
 	</div>		
 @endforeach
-</body>
-</html>
+</div>
+@endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="/js/doers/doers.js"></script>

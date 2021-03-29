@@ -2,11 +2,10 @@
 @extends('layout')
 @section('content')
 
-<script src="/js/tasks/custom.js"></script>
 <div class="container">
   	<div class="row">
 	  	<div class="col-sm-6">
-			<form id="searchForm" method = "get" action="">
+			<form id="searchForm" method = "GET" action="/">
 				
 			 	<input type="text" name="search" <?if ($search): ?> value="<?=$search?>"<?endif;?> class="form-control">
 				 <input type="submit" value="Искать"  class="form-control mr-sm-2">
@@ -46,3 +45,6 @@
 	@endforeach
 </div>	
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+<script src="/js/tasks/custom.js"></script>

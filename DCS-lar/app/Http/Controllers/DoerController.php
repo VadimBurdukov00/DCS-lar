@@ -32,8 +32,13 @@ class DoerController extends Controller
         ]);
     } 
     public function updateDoer(Request $request) {
-    	$Doer = Doer::find($request -> id);
-    	$Doer->update($request -> all());
+    	if($Doer = Doer::find($request -> id)){
+            $Doer->update($request -> all());
+            return json_encode(array("updated" => true));
+        } else {
+            return json_encode(array("updated" => false));
+        }
+    	
     }
 
     public function deleteDoer(Request $request) {

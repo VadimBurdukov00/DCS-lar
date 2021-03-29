@@ -91,31 +91,24 @@ $(document).ready(function () {
      
         $.ajax({
             type: 'POST',
-            url: '/tasks/update',
+            url: $('#editForm').attr( 'action' ),
             data: $('#editForm').serialize(),
             success: function (data) {
                 response = jQuery.parseJSON(data)
                 if (response['updated']) {
                     var notiEdit = new jBox('Modal', {
-                      content: 'Задача успешно обновлена'
+                      content: 'Задача успешно обновлена'+'<br>'+ '<a href="/tasks"> Вернуться на главную </a>'
                     });
                     notiEdit.open();
                     
                     
                 } else {
                     var notiEdit = new jBox('Modal', {
-                      content: 'Необходимо указать хотя бы одного исполнителя!'
-                      onclose: function(){
-                        window.location.href = "/tasks"
-                    }
+                      content: 'Необходимо указать хотя бы одного исполнителя!',     
                     });
                     notiEdit.open();
                 }
             },
-            error: function () {
-                $('#senderror').show();
-                $('#sendmessage').hide();
-            }
         });
     });
      

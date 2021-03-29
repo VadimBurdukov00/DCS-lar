@@ -6,7 +6,8 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	
 	<script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.2.14/dist/jBox.all.min.js"></script>
 	<link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.2.14/dist/jBox.all.min.css" rel="stylesheet">
 

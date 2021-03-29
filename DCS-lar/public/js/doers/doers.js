@@ -1,4 +1,37 @@
+ $(document).on('submit', $('#editForm'), function (e) {
+    e.preventDefault();
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    console.log( $('#editForm').serialize())
+    $.ajax({
+      type: 'POST',
+      url: $('#editForm').attr( 'action' ),
+      data: $('#editForm').serialize(),
+
+      success: function success(data) {
+        console.log(data)
+        var response = jQuery.parseJSON( data );
+        if (response["updated"]) {
+          var notiEdit= new jBox('Modal', {
+              content: 'Исполнитель успешно изменен'+'<br>'+ '<a href="/doers"> Вернуться на главную </a>'
+          }); 
+        } else {
+           var notiEdit= new jBox('Modal', {
+              content: 'Ошибка изменения'
+          });
+        }
+        notiEdit.open();
+      },
+    });
+  });
+
+
 $(document).ready(function () {
+
   function apendDoer(response){
     return  "<div class='row'>"+
               "<div class='col-sm-6'>"+
@@ -43,7 +76,7 @@ $(document).ready(function () {
               success: function success(data) {
                 var response = jQuery.parseJSON( data );
                 addDoerModal.close();
-                $("body").append(apendDoer(response));
+                $(".doers").append(apendDoer(response));
 
                 notiAdd.open();
               },
@@ -93,28 +126,5 @@ $(document).ready(function () {
     });
   });
 
-  $('#editForm').on('submit', function (e) {
-    e.preventDefault();
-
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-
-    $.ajax({
-      type: 'POST',
-      url: $('#editForm').attr( 'action' ),
-      data: $('#editForm').serialize(),
-
-      success: function success() {
-        var notiEdit= new jBox('Modal', {
-            content: 'Исполнитель успешно изменен'
-        }); 
-
-        notiEdit.open();
-        setTimeout(explode, window.location.href = "/doers");
-      },
-    });
-  });
+  
 });
