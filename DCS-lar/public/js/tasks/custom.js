@@ -1,11 +1,16 @@
 $(document).ready(function () {
     function apendTask(response){
+        if (!response['info'].name)
+            response['info'].name = "";
+         if (!response['info'].desc)
+            response['info'].desc = "";
+        console.log(response)
     return  "<div class='row'>"+
               "<div class='col-sm-6'>"+
                 "<div class='task'>"+
                   "Название: "+ response['info'].name + "<hr>"+ 
                   "Описание: " + response['info'].desc+ "<br>"+ 
-                  "Статус"+ response['status'].status+ "<br>"+ 
+                  "Статус "+ response['status'].status+ "<br>"+ 
                   "Исполинтели: " + response['doers'] + "<br>"+ 
                   "<button id='del' attr-id='"+response['info'].id+"' class='btn btn-primary more-button'>Удалить</button>" +
                   " <a href='/tasks/editTask/"+response['info'].id+"' class='btn btn-primary more-button'>Редактировать</a>"+
