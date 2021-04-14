@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('start');
 });
 
-Route::prefix('tasks')->group(function(){ 
+Route::prefix('tasks')->group(function(){
 
 	Route::get('/', [TaskController::class, 'index']);
 	Route::get('/search/{search?}', [TaskController::class, 'index']);
