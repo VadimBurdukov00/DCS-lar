@@ -1,24 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Task;
 use App\Models\Doer;
 use App\Models\Status;
+
 
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $search = $request->search;
-        $Tasks = Task::when($search, function ($Task, $search){
-            return Task::where('name',  'LIKE', '%' . $search . '%');
-        })->with('doers')->get();
+        $tasks = Task::when($search, function (Builder $query, string $search)
+        {
+            return $query->where('name',  'LIKE', '%' . $search . '%');
+        })
+            ->with('doers')
+            ->get();
 
     	return view('Tasks.index',[
-        	'Tasks' => $Tasks,
+        	'tasks' => $tasks,
         	'search' => $search,
-            'Status'=> Status::get()
+            'status'=> Status::get()
         ]);
     }
 

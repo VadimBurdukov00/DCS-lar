@@ -23,25 +23,25 @@
 	@endif
 </div>
 <div class = "container tasks">
-	@foreach($Tasks as $Task)
+	@foreach($tasks as $task)
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="task">
-				Название: {{$Task -> name}}<hr>
+				Название: {{$task -> name}}<hr>
 				Описание:
-				{{$Task->desc}}<br>
+				{{$task->desc}}<br>
 				Статус
-					@foreach($Status as $s)
-						@if ($s->id == $Task->staus)
+					@foreach($status as $s)
+						@if ($s->id == $task->staus)
 							{{$s->status}}<br>
 						@endif
 					@endforeach
 
 				Исполнители:
-                {{$Task->doers->pluck('name')->implode(', ')}}<br>
+                {{$task->doers->pluck('name')->implode(', ')}}<br>
 
-				<button id="del" attr-id="{{$Task->id}}" class="btn btn-primary more-button">Удалить</button>
-				<a href="/tasks/editTask/{{$Task->id}}" class="btn btn-primary more-button">Редактировать</a>
+				<button id="del" attr-id="{{$task->id}}" class="btn btn-primary more-button">Удалить</button>
+				<a href="/tasks/editTask/{{$task->id}}" class="btn btn-primary more-button">Редактировать</a>
 				<br><br><br>
 			</div>
 		</div>
