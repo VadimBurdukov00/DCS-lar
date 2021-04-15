@@ -18,10 +18,10 @@
 	    <div class="container">
 	        <div class="row">
 	            <div class="col-md-1 ">
-	                <a href="/ENTRANCE_V2.0/DCS-lar/DCS-lar/public/tasks"  class="btn btn-primary more-button">Задачи</a>
+	                <a href="/tasks"  class="btn btn-primary more-button">Задачи</a>
 	            </div>
 	            <div class="col-md-1 ">
-	                <a href="/ENTRANCE_V2.0/DCS-lar/DCS-lar/public/doers" class="btn btn-primary more-button">Исполнители</a>
+	                <a href="/doers" class="btn btn-primary more-button">Исполнители</a>
 		        </div>
 	            </div>
 	        </div>

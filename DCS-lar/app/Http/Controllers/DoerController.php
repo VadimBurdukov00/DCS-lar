@@ -21,7 +21,7 @@ class DoerController extends Controller
  	public function saveDoer(Request $request)
     {
     	$Doer = Doer::create($request->all());
-        return json_encode(array("info" => $request->all(), 
+        return json_encode(array("info" => $request->all(),
             "id" =>$Doer->id)
         );
     }
@@ -30,7 +30,7 @@ class DoerController extends Controller
     	return view('Doers.view',[
     		'Doer' => Doer::find($id),
         ]);
-    } 
+    }
     public function updateDoer(Request $request) {
     	if($Doer = Doer::find($request -> id)){
             $Doer->update($request -> all());
@@ -38,27 +38,31 @@ class DoerController extends Controller
         } else {
             return json_encode(array("updated" => false));
         }
-    	
+
     }
 
     public function deleteDoer(Request $request) {
         $delEnable = true;
     	$Tasks = Task::get();
-    	$Doer = Doer::find($request -> id);	
-    	foreach ($Tasks as $Task) {
+    	$Doer = Doer::find($request -> id);
+
+        if (!$Doer->delete())
+            return json_encode(array("deleted" => false));
+        return json_encode(array("deleted" => true));
+    	/*foreach ($Tasks as $Task) {
     		$isDoer = $Task->doers()->where('id', $request->id)->count();
     		$doerCount = $Task->doers()->wherePivot('task_id', '=', $Task->id)->count();
     		if ($isDoer && $doerCount==1)
     			$delEnable = false;
     	}
         if($delEnable){
-            $Doer = Doer::find($request -> id);     
+            $Doer = Doer::find($request -> id);
             $Doer->delete();
             $Doer->tasks()->detach();
             return json_encode(array("deleted" => true));
         } else {
             return json_encode(array("deleted" => false));
-        }
-	
+        }*/
+
     }
 }
