@@ -9,16 +9,15 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-
     public function index(Request $request) {
-    	if (!empty($request->search)){
-    		$Tasks = Task::where('name',  'LIKE', '%' . $request->search . '%')->get();
-    	} else {
-    		$Tasks = Task::get();
-    	}
+        $search = $request->search;
+        $Tasks = Task::when($search, function ($Task, $search){
+            return Task::where('name',  'LIKE', '%' . $search . '%');
+        })->with('doers')->get();
+
     	return view('Tasks.index',[
         	'Tasks' => $Tasks,
-        	'search' => $request->search,
+        	'search' => $search,
             'Status'=> Status::get()
         ]);
     }
@@ -31,7 +30,7 @@ class TaskController extends Controller
             'Status'=> Status::get()
         ]);
     }
- 	public function saveTask(Request $request) {	
+ 	public function saveTask(Request $request) {
     	if($request->input('doers')){
             $task = Task::create($request->all());
     		$task->doers()->attach($request->input('doers'));
@@ -40,7 +39,7 @@ class TaskController extends Controller
     	} else {
             return json_encode(array("info" => false));
         }
-        
+
     }
 
 
@@ -50,13 +49,13 @@ class TaskController extends Controller
         	'Doers' => Doer::get(),
             'Status' =>Status::get(),
         ]);
-    } 
+    }
     public function updateTask(Request $request) {
-    	
+
     	if($request->input('doers')){
             $task = Task::find($request -> id);
             $task->update($request -> all());
-            
+
             $task->doers()->detach();
     		$task->doers()->attach($request->input('doers'));
             return json_encode(array("updated" => true));

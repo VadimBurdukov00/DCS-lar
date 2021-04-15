@@ -6,15 +6,15 @@
   	<div class="row">
 	  	<div class="col-sm-6">
 			<form id="searchForm" method = "GET" action="/tasks">
-				
-			 	<input type="text" name="search" <?if ($search): ?> value="<?=$search?>"<?endif;?> class="form-control">
+
+			 	<input type="text" name="search" <?php if($search):?> value="<?=$search?>"<?php endif;?> class="form-control">
 				 <input type="submit" value="Искать"  class="form-control mr-sm-2">
 			</form>
 	 	</div>
 	 	<div class="col-sm-6 ">
 	  		<button id="addTask"  class="btn btn-primary more-button"> Добавить</button>
-		</div> 
-	</div> 
+		</div>
+	</div>
 </div>
 <div class="container">
 	@if($search)
@@ -37,18 +37,18 @@
 						@endif
 					@endforeach
 
-				Исполнители: 
-				{{$Task->doers()->pluck('name')->implode(', ')}}<br>
+				Исполнители:
+                {{$Task->doers->pluck('name')->implode(', ')}}<br>
 
 				<button id="del" attr-id="{{$Task->id}}" class="btn btn-primary more-button">Удалить</button>
 				<a href="/tasks/editTask/{{$Task->id}}" class="btn btn-primary more-button">Редактировать</a>
 				<br><br><br>
 			</div>
 		</div>
-	</div>				
+	</div>
 	@endforeach
-</div>	
+</div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	
+
 <script src="/js/tasks/custom.js"></script>
