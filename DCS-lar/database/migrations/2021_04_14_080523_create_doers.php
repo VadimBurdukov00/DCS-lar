@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDoerTaskTable extends Migration
+class CreateDoers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateDoerTaskTable extends Migration
      */
     public function up()
     {
-        Schema::create('doer_task', function (Blueprint $table) {
-            $table->integer('doer_id');
-            $table->integer('task_id');
+        Schema::create('doers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('post');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ class CreateDoerTaskTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doer_task');
+        Schema::dropIfExists('doers');
     }
 }

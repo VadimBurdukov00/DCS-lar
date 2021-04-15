@@ -1,25 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Task;
 use App\Models\Doer;
 use App\Models\Status;
+
 
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    public function index(Request $request)
+    {
+        $search = $request->search;
+        $tasks = Task::when($search, function (Builder $query, string $search)
+        {
+            return $query->where('name',  'LIKE', '%' . $search . '%');
+        })
+            ->with('doers')
+            ->get();
 
-    public function index(Request $request) {
-    	if (!empty($request->search)){
-    		$Tasks = Task::where('name',  'LIKE', '%' . $request->search . '%')->get();
-    	} else {
-    		$Tasks = Task::get();
-    	}
     	return view('Tasks.index',[
-        	'Tasks' => $Tasks,
-        	'search' => $request->search,
-            'Status'=> Status::get()
+        	'tasks' => $tasks,
+        	'search' => $search,
+            'status'=> Status::get()
         ]);
     }
 
@@ -31,7 +36,7 @@ class TaskController extends Controller
             'Status'=> Status::get()
         ]);
     }
- 	public function saveTask(Request $request) {	
+ 	public function saveTask(Request $request) {
     	if($request->input('doers')){
             $task = Task::create($request->all());
     		$task->doers()->attach($request->input('doers'));
@@ -40,7 +45,7 @@ class TaskController extends Controller
     	} else {
             return json_encode(array("info" => false));
         }
-        
+
     }
 
 
@@ -50,13 +55,13 @@ class TaskController extends Controller
         	'Doers' => Doer::get(),
             'Status' =>Status::get(),
         ]);
-    } 
+    }
     public function updateTask(Request $request) {
-    	
+
     	if($request->input('doers')){
             $task = Task::find($request -> id);
             $task->update($request -> all());
-            
+
             $task->doers()->detach();
     		$task->doers()->attach($request->input('doers'));
             return json_encode(array("updated" => true));

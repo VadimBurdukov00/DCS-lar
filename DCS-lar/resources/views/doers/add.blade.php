@@ -1,6 +1,6 @@
 <div class="container">
   	<div class="row">
-  		<div class="col-sm-12">	
+  		<div class="col-sm-12">
 			<form id="newDoer" method = "post" action="/doers/save">
 				{{ csrf_field() }}
 				<div>
@@ -20,4 +20,4 @@
 			</form>
 		</div>
 	</div>
-</div>	
+</div>

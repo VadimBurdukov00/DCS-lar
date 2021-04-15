@@ -1,17 +1,17 @@
 h1{
-	color:white;
+    color:white;
 }
 a.nav-link{
-	color:white;
+    color:white;
 }
 .error-block{
-	opacity:0;
+    opacity:0;
 }
 
 .error-text{
-	color:red;
+    color:red;
 }
 
 .collapse{
-	margin: 0px 20px;
+    margin: 0px 20px;
 }

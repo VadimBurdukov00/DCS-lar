@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
   	<div class="row">
-  		<div class="col-sm-12">	
+  		<div class="col-sm-12">
 			<form id="editForm" method = "post" action="/doers/update">
 				{{ csrf_field() }}
 
@@ -27,5 +27,5 @@
 <div>
 	@endsection
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="/js/doers/doers.js"></script>	
+	<script src="/js/doers/doers.js"></script>
 
