@@ -14,8 +14,7 @@ class DoerObserver
      * @param  \App\Models\Doer  $doer
      * @return void
      */
-    public function deleting(Doer $doer)
-    {
+    public function deleting(Doer $doer)  {
         $Tasks = Task::get();
         foreach ($Tasks as $Task) {
             $isDoer = $Task->doers()->where('id', $doer->id)->count();

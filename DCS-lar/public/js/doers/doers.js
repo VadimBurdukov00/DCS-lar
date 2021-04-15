@@ -18,9 +18,9 @@ $(document).ready(function () {
       data: $('#editForm').serialize(),
       success: function success(data) {
         console.log(data);
-        var response = jQuery.parseJSON(data);
+        var response = data.updated;
 
-        if (response["updated"]) {
+        if (response) {
           var notiEdit = new jBox('Modal', {
             content: 'Исполнитель успешно изменен' + '<br>' + '<a href="/doers"> Вернуться на главную </a>'
           });
@@ -29,14 +29,22 @@ $(document).ready(function () {
             content: 'Ошибка изменения'
           });
         }
-
         notiEdit.open();
       }
     });
   });
 
   function apendDoer(response) {
-    return "<div class='row'>" + "<div class='col-sm-6'>" + "<div class='doer'>" + "Имя: " + response['info'].name + "<hr>" + "Должность: " + response['info'].post + "<hr>" + "<button id='del' attr-id='" + response['id'] + "' class='btn btn-primary more-button'>Удалить</button>" + " <a href='/doers/editDoer/" + response['id'] + "' class='btn btn-primary more-button'>Редактировать</a>" + "</div>" + "</div>" + "</div>";
+    return  "<div class='row'>" +
+                "<div class='col-sm-6'>" +
+                    "<div class='doer'>" +
+                        "Имя: " + response[0].name + "<hr>" +
+                        "Должность: " + response[0].post + "<hr>" +
+                        "<button id='del' attr-id='" + response['id'] + "' class='btn btn-primary more-button'>Удалить</button>" +
+                        " <a href='/doers/editDoer/" + response['id'] + "' class='btn btn-primary more-button'>Редактировать</a>" +
+                    "</div>" +
+                "</div>" +
+            "</div>";
   }
 
   $('#addDoer').click(function (e) {
@@ -49,9 +57,7 @@ $(document).ready(function () {
         reload: 'strict',
         setContent: true,
         success: function success(response) {
-          var notiAdd = new jBox('Modal', {
-            content: 'Исполнитель успешно добавлен'
-          });
+
           $('#newDoer').on('submit', function (e) {
             e.preventDefault();
             $.ajaxSetup({
@@ -64,10 +70,22 @@ $(document).ready(function () {
               url: $('#newDoer').attr('action'),
               data: $('#newDoer').serialize(),
               success: function success(data) {
-                var response = jQuery.parseJSON(data);
-                addDoerModal.close();
-                $(".doers").append(apendDoer(response));
-                notiAdd.open();
+                  var status = data.created;
+                  if(status){
+                      var response = [data.info, data.id];
+                      console.log(response[0].name)
+                      addDoerModal.close();
+                      $(".doers").append(apendDoer(response));
+                      var notiAdd = new jBox('Modal', {
+                          content: 'Исполнитель создан'
+                      });
+
+                  } else {
+                      var notiAdd = new jBox('Modal', {
+                          content: 'Ошибка создания'
+                      });
+                  }
+                  notiAdd.open();
               }
             });
           });
@@ -89,10 +107,9 @@ $(document).ready(function () {
         id: id
       },
       success: function success(data) {
-          console.log(data);
-        var response = jQuery.parseJSON(data);
+        var response = data.deleted;
 
-        if (response["deleted"]) {
+        if (response) {
           elemDiv.remove();
           var notiDel = new jBox('Modal', {
             content: 'Исполнитель успешно удален'
@@ -108,7 +125,7 @@ $(document).ready(function () {
       error: function error() {
         var notiDel = new jBox('Modal', {
           content: 'При удалении произошла ошибка'
-        });
+        }).open();
       }
     });
   });

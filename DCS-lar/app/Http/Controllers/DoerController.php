@@ -2,67 +2,71 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Doer;
-use App\Models\Task;
-use Illuminate\Support\Facades\DB;
+use \Illuminate\Contracts\View\View;
 
-class DoerController extends Controller
-{
-    public function index() {
+class DoerController extends Controller{
+
+    public function index(): View
+    {
     	return view('Doers.index',[
         	'Doers' => Doer::get()
         ]);
     }
 
-    public function addDoer() {
+    public function addDoer(): View
+    {
     	return view('Doers.add');
     }
- 	public function saveDoer(Request $request)
+ 	public function saveDoer(Request $request): JsonResponse
     {
-    	$Doer = Doer::create($request->all());
-        return json_encode(array("info" => $request->all(),
-            "id" =>$Doer->id)
-        );
+        $data = ["created" => false];
+    	if($Doer = Doer::create($request->all()))
+        {
+            $data = [
+                "created" => true,
+                "info" => $request->all(),
+                "id" => $Doer->id
+            ];
+        }
+        return response()->json($data);
     }
 
-    public function viewDoer($id) {
+    public function viewDoer(int $id): View
+    {
     	return view('Doers.view',[
     		'Doer' => Doer::find($id),
         ]);
     }
-    public function updateDoer(Request $request) {
-    	if($Doer = Doer::find($request -> id)){
-            $Doer->update($request -> all());
-            return json_encode(array("updated" => true));
-        } else {
-            return json_encode(array("updated" => false));
-        }
 
+    public function updateDoer(Request $request): JsonResponse
+    {
+        $data = ["updated" => true];
+
+    	if($Doer = Doer::find($request -> id))
+    	{
+            if(!$Doer->update($request -> all()))
+            {
+                $data = ["updated" => false];
+            }
+        }
+    	else
+    	{
+            $data = ["updated" => false];
+        }
+        return response()->json($data);
     }
 
-    public function deleteDoer(Request $request) {
-        $delEnable = true;
-    	$Tasks = Task::get();
+    public function deleteDoer(Request $request): JsonResponse
+    {
     	$Doer = Doer::find($request -> id);
-
+        $data = ["deleted" => true];
         if (!$Doer->delete())
-            return json_encode(array("deleted" => false));
-        return json_encode(array("deleted" => true));
-    	/*foreach ($Tasks as $Task) {
-    		$isDoer = $Task->doers()->where('id', $request->id)->count();
-    		$doerCount = $Task->doers()->wherePivot('task_id', '=', $Task->id)->count();
-    		if ($isDoer && $doerCount==1)
-    			$delEnable = false;
-    	}
-        if($delEnable){
-            $Doer = Doer::find($request -> id);
-            $Doer->delete();
-            $Doer->tasks()->detach();
-            return json_encode(array("deleted" => true));
-        } else {
-            return json_encode(array("deleted" => false));
-        }*/
-
+        {
+            $data["deleted"] = false;
+        }
+        return response()->json($data);
     }
 }
